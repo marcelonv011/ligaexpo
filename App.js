@@ -1,20 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import LoginStack from './app/navigation/LoginStack';
+import {decode, encode} from 'base-64';
+import Navigation from './app/navigation/Navigation';
+import { firebaseApp } from "./app/utils/Firebase";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  if (!global.btoa) {
+    global.btoa = encode;
+  }
+  if (!global.atob) {
+    global.atob = decode;
+  }
+  return <LoginStack/>
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
