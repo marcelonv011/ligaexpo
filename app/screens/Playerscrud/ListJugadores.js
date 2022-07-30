@@ -46,6 +46,17 @@ export default function ListJugadores() {
     setJugadores(newJugadores);
   };
 
+  // ordenar de menor a mayor
+  const handleOrderNumeral = () => {
+    let newJugadores = [...jugadores];
+
+    newJugadores.sort((a, b) =>
+      a.edad > b.edad ? 1 : b.edad > a.edad ? -1 : 0
+    );
+
+    setJugadores(newJugadores);
+  };
+
   // jugadores....
 
   useEffect(() => {
@@ -87,9 +98,21 @@ export default function ListJugadores() {
             type="material-community"
             name="order-alphabetical-ascending"
             color="black"
-            size={32}
+            size={30}
           />
           <Text style={styles.textoorden}> Ordenar alfabeticamente</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleOrderNumeral}
+          style={styles.orderButton}
+        >
+          <Icon
+            type="material-community"
+            name="format-list-numbered"
+            color="black"
+            size={30}
+          />
+          <Text style={styles.textonumerico}> Ordenar numericamente</Text>
         </TouchableOpacity>
       </View>
       {jugadores.map((jugador) => {
@@ -138,10 +161,17 @@ const styles = StyleSheet.create({
   },
 
   textoorden: {
-    fontSize: 18,
-    marginTop: -21,
+    fontSize: 15,
+    marginTop: -18,
     marginRight: -140,
-    marginLeft: 75,
+    marginLeft: 45,
+    fontWeight: "bold",
+  },
+  textonumerico: {
+    fontSize: 15,
+    marginTop: -18,
+    marginRight: 10,
+    marginLeft: 190,
     fontWeight: "bold",
   },
 });
