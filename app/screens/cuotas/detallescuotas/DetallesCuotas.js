@@ -8,18 +8,19 @@ import {
   Alert,
 } from "react-native";
 import { Button } from "react-native-elements";
-import Firebase from "../../utils/Firebase";
+import Firebase from "../../../utils/Firebase";
 import Toast, { DURATION } from "react-native-easy-toast";
-import Loading from "../../components/Loading";
+import Loading from "../../../components/Loading";
 import { useNavigation } from "@react-navigation/native";
 
-export default function DetallesJugadores(props) {
+export default function DetallesCuotas(props) {
   const initialState = {
     id: "",
     nombrecompleto: "",
-    edad: "",
-    telefono: "",
+    pagorealizado: "",
+    importe: "",
   };
+
   const [jugador, setJugador] = useState(initialState);
 
   const navigation = useNavigation();
@@ -47,37 +48,14 @@ export default function DetallesJugadores(props) {
     setJugador({ ...jugador, [nombrecompleto]: value });
   };
 
-  const deleteJugador = async () => {
-    const dbRef = Firebase.db
-      .collection("jugadores")
-      .doc(props.route.params.jugadorId);
-    await dbRef.delete();
-    navigation.navigate("listjugadores");
-  };
-
   const updateUser = async () => {
     const dbRef = Firebase.db.collection("jugadores").doc(jugador.id);
     await dbRef.set({
-      nombrecompleto: jugador.nombrecompleto,
-      edad: jugador.edad,
-      telefono: jugador.telefono,
+      pagorealizado: jugador.pagorealizado,
+      importe: jugador.importe,
     });
     setJugador(initialState);
-    navigation.navigate("listjugadores");
-  };
-
-  const alertaConfirmacionBorrar = () => {
-    Alert.alert(
-      "borrar el jugador",
-      "¿Estás seguro que quieres borrar el jugador?",
-      [
-        { text: "SI", onPress: () => deleteJugador() },
-        {
-          text: "NO",
-          onPress: () => toastRef.current.show("No borró el jugador", 3000),
-        },
-      ]
-    );
+    navigation.navigate("enero");
   };
 
   if (loading) {
@@ -88,54 +66,42 @@ export default function DetallesJugadores(props) {
     <ScrollView style={styles.container}>
       <View style={styles.input}>
         <View style={styles.titulocontainer}>
-          <Text style={styles.titulotext}> Apellido y nombre </Text>
+          <Text style={styles.titulotext}> Apellido y nombre: </Text>
+        </View>
+        <Text style={styles.nombrejugador}>{jugador.nombrecompleto}</Text>
+      </View>
+      <View style={styles.input}>
+        <View style={styles.titulocontainer}>
+          <Text style={styles.titulotext}> Pago realizado: </Text>
         </View>
         <TextInput
           style={styles.estiloinput}
-          placeholder="Apellido y nombre"
-          value={jugador.nombrecompleto}
-          onChangeText={(value) => handleChangeText("nombrecompleto", value)}
+          placeholder="Pago realizado"
+          value={jugador.pagorealizado}
+          onChangeText={(value) => handleChangeText("pagorealizado", value)}
         />
       </View>
       <View style={styles.input}>
         <View style={styles.titulocontainer}>
-          <Text style={styles.titulotext}> Edad </Text>
+          <Text style={styles.titulotext}> importe: </Text>
         </View>
         <TextInput
           style={styles.estiloinput}
-          placeholder="Edad"
-          value={jugador.edad}
+          placeholder="importe"
+          value={jugador.importe}
           keyboardType="numeric"
-          onChangeText={(value) => handleChangeText("edad", value)}
-        />
-      </View>
-      <View style={styles.input}>
-        <View style={styles.titulocontainer}>
-          <Text style={styles.titulotext}> Teléfono </Text>
-        </View>
-        <TextInput
-          style={styles.estiloinput}
-          placeholder="Teléfono de contacto"
-          value={jugador.telefono}
-          keyboardType="numeric"
-          onChangeText={(value) => handleChangeText("telefono", value)}
+          onChangeText={(value) => handleChangeText("importe", value)}
         />
       </View>
       <View>
         <Button
-          title={"Actualizar Jugador"}
+          title={"Actualizar Cuota paga"}
           onPress={() => updateUser()}
           containerStyle={styles.botoncontainer}
           buttonStyle={styles.botonfondoactualizar}
         />
       </View>
       <View>
-        <Button
-          title={"Borrar Jugador"}
-          onPress={() => alertaConfirmacionBorrar()}
-          containerStyle={styles.botoncontainer}
-          buttonStyle={styles.botonfondoborrar}
-        />
         <Toast
           ref={toastRef}
           style={{ backgroundColor: "#d7001a", borderRadius: 20 }}
@@ -151,6 +117,10 @@ export default function DetallesJugadores(props) {
 const styles = StyleSheet.create({
   container: {
     marginTop: 50,
+  },
+  nombrejugador: {
+    fontSize: 25,
+    marginLeft: 15,
   },
   titulotext: {
     fontSize: 20,

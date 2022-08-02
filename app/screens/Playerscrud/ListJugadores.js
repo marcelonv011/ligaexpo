@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
-import { Badge, Button, ListItem, Icon, Text } from "react-native-elements";
+import { Button, ListItem, Icon, Text } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import Firebase from "../../utils/Firebase";
 import TouchableScale from "react-native-touchable-scale";

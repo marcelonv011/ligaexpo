@@ -1,64 +1,98 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Modal,
-  Alert,
-  Dimensions,
-} from "react-native";
-import { Picker } from "@react-native-picker/picker";
-import { ModalPicker } from "./ModalPicker";
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function BotonesCuotas() {
-  const [chooseData, setchooseDate] = useState("Mes");
-  const [isModalVisible, setisModalVisible] = useState(false);
-
-  const changeModalVisibility = (bool) => {
-    setisModalVisible(bool);
-  };
-
-  const setData = (option) => {
-    setchooseDate(option);
-  };
-
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <View>
+      <Text style={styles.titmes}>Selecciona el mes</Text>
       <TouchableOpacity
-        onPress={() => changeModalVisibility(true)}
-        style={styles.button}
+        style={styles.button1}
+        onPress={() => navigation.navigate("enero")}
       >
-        <Text style={styles.buttontext}> {chooseData}</Text>
+        <Text style={styles.buttontext}>Enero</Text>
       </TouchableOpacity>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isModalVisible}
-        nRequestClose={() => changeModalVisibility(false)}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("febrero")}
       >
-        <ModalPicker
-          changeModalVisibility={changeModalVisibility}
-          setData={setData}
-        />
-      </Modal>
+        <Text style={styles.buttontext}>Febrero</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("marzo")}
+      >
+        <Text style={styles.buttontext}>Marzo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("abril")}
+      >
+        <Text style={styles.buttontext}>Abril</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("mayo")}
+      >
+        <Text style={styles.buttontext}>Mayo</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("junio")}
+      >
+        <Text style={styles.buttontext}>Junio</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("julio")}
+      >
+        <Text style={styles.buttontext}>Julio</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("agosto")}
+      >
+        <Text style={styles.buttontext}>Agosto</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("septiembre")}
+      >
+        <Text style={styles.buttontext}>Septiembre</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("octubre")}
+      >
+        <Text style={styles.buttontext}>Octubre</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("noviembre")}
+      >
+        <Text style={styles.buttontext}>Noviembre</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("diciembre")}
+      >
+        <Text style={styles.buttontext}>Diciembre</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
+  button1: {
     backgroundColor: "#003BFF",
-    width: "110%",
+    width: "60%",
     height: 50,
+    marginTop: 15,
+    marginLeft: 95,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 15,
+    borderRadius: 2,
     shadowColor: "#FFFFFF",
     shadowOffset: {
       width: 0,
@@ -67,11 +101,36 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.87,
     elevation: 5,
-    marginBottom: 10,
+    marginBottom: 1,
+  },
+  button: {
+    backgroundColor: "#003BFF",
+    width: "60%",
+    height: 50,
+    marginTop: 0,
+    marginLeft: 95,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 2,
+    shadowColor: "#FFFFFF",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.87,
+    elevation: 5,
+    marginBottom: 1,
   },
   buttontext: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#FFFFFF",
+  },
+  titmes: {
+    fontSize: 25,
+    fontWeight: "bold",
+    marginLeft: 135,
+    marginTop: 30,
   },
 });

@@ -14,6 +14,8 @@ export default function CreateJugadores(props) {
     nombrecompleto: "",
     edad: "",
     telefono: "",
+    pagorealizado: Boolean,
+    importe: "",
   });
 
   const handleChangeText = (nombrecompleto, value) => {
@@ -32,6 +34,8 @@ export default function CreateJugadores(props) {
           nombrecompleto: state.nombrecompleto,
           edad: state.edad,
           telefono: state.telefono,
+          pagorealizado: state.pagorealizado,
+          importe: state.importe,
         });
         navigation.navigate("listjugadores");
       } catch (error) {
